@@ -60,3 +60,58 @@ npm install
 npm run dev
 docker run --rm -it -p 8080:80 clue/json-server https://raw.githubusercontent.com/GeoWerkstatt/coding-assessment-assets/refs/heads/main/db.json.
 ```
+
+## Reverse Proxy SetUp
+
+The last bonus of the assessment asked about creating a Traefik reverse proxy to serve both applications on a single domain. My experience with Traefik is limited, but i have worked extensively with nginx for this purpose. Research online says the approaches don't differ too much, so i'll quickly outline how i'd do it on a super high level:
+
+### 1. Where does it live?
+Depending how we're deploying the application we have a few options. 
+
+- On Kubernetes we can create an nginx-ingress resource. In it we can define the host, and the paths the ingress listens on. Based on the rules we set up, we can redirect traffic to the appropriate pod based on the path the user chooses.
+- If we're deploying bare metal on a linux server, we install nginx on the machine. In it's .conf file we can do two things, either redirect traffic to locally run Docker Container with our API or Frontend in it. Another approach is to run the applications locally and have nginx redirect traffic to the appropriate localhost.
+
+### 2. Writing the conf rules
+Once we established how to approach it, we write the conf files for it. on nginx this could look like this:
+
+```
+server {
+    listen 80;
+    server_name app.localhost;
+
+    location / {
+        proxy_pass http://frontend:5173;
+        [...]
+    }
+}
+
+server {
+    listen 80;
+    server_name api.localhost;
+
+    location / {
+        proxy_pass http://json-server:80;
+        [...]
+    }
+}
+```
+
+or
+
+```
+server {
+    listen 80;
+    server_name app.localhost;
+
+    location / {
+        proxy_pass http://frontend:5173;
+        [...]
+    }
+
+    location /api {
+        proxy_pass http://json-server:80;
+        [...]
+    }
+}
+
+```
