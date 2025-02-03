@@ -1,5 +1,5 @@
 import "./SearchInput.style.scss";
-import {useMovieContext} from "../../../../contexts/Search.context.tsx";
+import {useMovieContext} from "../../../../contexts/Movie.context.tsx";
 
 const SearchInput = () => {
   const { searchText, setSearchText } = useMovieContext();

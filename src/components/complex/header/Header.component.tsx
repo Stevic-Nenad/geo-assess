@@ -1,5 +1,6 @@
 import "./Header.style.scss";
 import SearchInput from "../../atomic/input/search/SearchInput.component.tsx";
+import SortButton from "../../atomic/button/sort/SortButton.component.tsx";
 
 const Header = () => {
   return(
@@ -11,7 +12,7 @@ const Header = () => {
         <SearchInput />
       </div>
       <div className="header__sort">
-        <button className="header__sort__button">Sort</button>
+        <SortButton />
       </div>
     </div>
   )

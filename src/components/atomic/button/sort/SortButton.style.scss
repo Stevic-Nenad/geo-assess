@@ -1,1 +1,17 @@
-.
+.button-sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  aspect-ratio: 1;
+  height: 2rem;
+
+  &__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+}

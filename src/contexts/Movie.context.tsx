@@ -1,5 +1,5 @@
 import {createContext, useContext} from "react";
-import MovieContextType from "./Search.type.ts";
+import MovieContextType from "./Movie.type.ts";
 
 export const MovieContext = createContext<MovieContextType | undefined>(undefined);
 

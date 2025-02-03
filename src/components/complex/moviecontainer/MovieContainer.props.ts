@@ -12,5 +12,4 @@ export enum MovieSort {
 
 export interface MovieContainerProps {
   filter: MovieFilter;
-  sort: MovieSort;
 }

@@ -1,10 +1,13 @@
 import './App.scss'
 import HomePage from "./page/Home.page.tsx";
+import {MovieProvider} from "./contexts/Movie.provider.tsx";
 
 const App = () => {
-  return(
+  return (
     <div className="app">
-      <HomePage />
+      <MovieProvider>
+        <HomePage/>
+      </MovieProvider>
     </div>
   )
 }

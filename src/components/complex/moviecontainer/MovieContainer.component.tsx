@@ -3,11 +3,11 @@ import Movie from "../../../models/Movie.ts";
 import {useCallback, useEffect, useState} from "react";
 import MovieCard from "../moviecard/MovieCard.component.tsx";
 import MovieDetails from "../moviedetails/MovieDetails.component.tsx";
-import {MovieContainerProps, MovieFilter} from "./MovieContainer.props.ts";
-import {useMovieContext} from "../../../contexts/Search.context.tsx";
+import {MovieContainerProps, MovieFilter, MovieSort} from "./MovieContainer.props.ts";
+import {useMovieContext} from "../../../contexts/Movie.context.tsx";
 
-const MovieContainer = ({filter, sort}: MovieContainerProps) => {
-  const {searchText} = useMovieContext();
+const MovieContainer = ({filter}: MovieContainerProps) => {
+  const {searchText, movieSort} = useMovieContext();
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
 
@@ -31,16 +31,26 @@ const MovieContainer = ({filter, sort}: MovieContainerProps) => {
     }
   }, []);
 
-  const filteredMovies = movies.filter(movie => {
-    if (searchText === '') {
-      return true;
-    }
+  const processedMovies = ():Movie[] => {
+    let processed: Movie[] = movies.filter(movie => {
+      if (searchText === '') return true;
 
-    const searchLower = searchText.toLowerCase();
-    const fieldToSearch = filter === MovieFilter.TITLE ? movie.title : movie.description;
+      const searchLower = searchText.toLowerCase();
+      const fieldToSearch = filter === MovieFilter.TITLE
+        ? movie.title
+        : movie.description;
 
-    return fieldToSearch.toLowerCase().includes(searchLower);
-  });
+      return fieldToSearch.toLowerCase().includes(searchLower);
+    });
+
+    processed = processed.sort((a, b) => {
+      if (movieSort === MovieSort.ASC) return a.title.localeCompare(b.title);
+      if (movieSort === MovieSort.DESC) return b.title.localeCompare(a.title);
+      return 0;
+    });
+
+    return processed;
+  };
 
   useEffect(() => {
     void fetchMovies();
@@ -48,8 +58,8 @@ const MovieContainer = ({filter, sort}: MovieContainerProps) => {
 
   return (
     <div className="movie-container">
-      {filteredMovies.length == 0 && "No movies found."}
-      {filteredMovies && filteredMovies.map((movie) => (
+      {processedMovies().length == 0 && "No movies found."}
+      {processedMovies() && processedMovies().map((movie) => (
         <MovieCard key={movie.id} movie={movie} onClick={setSelectedMovie}/>
       ))}
       {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} onClose={() => setSelectedMovie(null)}/>)}
