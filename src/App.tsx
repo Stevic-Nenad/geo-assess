@@ -1,9 +1,9 @@
-import './App.css'
+import './App.scss'
 import HomePage from "./page/Home.page.tsx";
 
 const App = () => {
   return(
-    <div>
+    <div className="app">
       <HomePage />
     </div>
   )
