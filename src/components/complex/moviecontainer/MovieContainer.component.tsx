@@ -33,7 +33,7 @@ const MovieContainer = () => {
   return (
     <div className="movie-container">
       {movies && movies.map((movie) => (
-        <MovieCard movie={movie}/>
+        <MovieCard key={movie.id} movie={movie}/>
       ))}
     </div>
   );
