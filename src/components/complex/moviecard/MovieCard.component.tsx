@@ -1,7 +1,10 @@
-const MovieCard = () => {
+import MovieCardProps from "./MovieCard.props.ts";
+
+const MovieCard = ({movie}:MovieCardProps) => {
   return(
     <div className="movie-card">
-      Movie Card
+      <img src={movie.cover} alt="cover" />
+      <h3>{movie.title}</h3>
     </div>
   );
 }
