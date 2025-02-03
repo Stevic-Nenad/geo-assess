@@ -7,7 +7,7 @@ const MovieContainer = () => {
 
   const fetchMovies = useCallback(async () => {
     try {
-      const response = await fetch("http://localhost:8080/movies");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/movies`);
       if (!response.ok) {
         throw new Error("Could not find movies from the server");
       }
