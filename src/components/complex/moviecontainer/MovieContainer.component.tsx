@@ -5,6 +5,7 @@ import MovieCard from "../moviecard/MovieCard.component.tsx";
 import MovieDetails from "../moviedetails/MovieDetails.component.tsx";
 
 const MovieContainer = () => {
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const fetchMovies = useCallback(async () => {
@@ -34,9 +35,9 @@ const MovieContainer = () => {
   return (
     <div className="movie-container">
       {movies && movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie}/>
+        <MovieCard key={movie.id} movie={movie} onClick={setSelectedMovie} />
       ))}
-      {movies && movies.length > 0 && (<MovieDetails movie={movies[0]} open={true}/>)}
+      {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} open={true}/>)}
     </div>
   );
 }

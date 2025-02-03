@@ -1,7 +1,7 @@
 import Movie from "../../../models/Movie.ts";
 
 interface MovieDetailsProps {
-  movie: Movie;
+  movie: Movie | null;
   open: boolean;
 }
 
