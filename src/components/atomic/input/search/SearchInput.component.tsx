@@ -1,11 +1,13 @@
 import "./SearchInput.style.scss";
-import SearchInputProps from "./SearchInput.props.ts";
+import {useMovieContext} from "../../../../contexts/Search.context.tsx";
 
-const SearchInput = ({text, onChange}: SearchInputProps) => {
+const SearchInput = () => {
+  const { searchText, setSearchText } = useMovieContext();
+
   return (
     <input className="input-search"
-           value={text}
-           onChange={() => onChange(text)}
+           value={searchText}
+           onChange={(e) => setSearchText(e.target.value)}
            placeholder="Search..."
     />
   );
