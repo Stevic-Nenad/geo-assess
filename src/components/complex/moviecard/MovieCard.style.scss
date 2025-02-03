@@ -8,6 +8,8 @@
   transition: transform 0.2s;
   cursor: pointer;
 
+  max-width: 25rem;
+
   &__image {
     display: flex;
     width: 100%;

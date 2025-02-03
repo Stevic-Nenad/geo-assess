@@ -3,8 +3,11 @@ import Movie from "../../../models/Movie.ts";
 import {useCallback, useEffect, useState} from "react";
 import MovieCard from "../moviecard/MovieCard.component.tsx";
 import MovieDetails from "../moviedetails/MovieDetails.component.tsx";
+import {MovieContainerProps, MovieFilter} from "./MovieContainer.props.ts";
+import {useMovieContext} from "../../../contexts/Search.context.tsx";
 
-const MovieContainer = () => {
+const MovieContainer = ({filter, sort}: MovieContainerProps) => {
+  const {searchText} = useMovieContext();
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
 
@@ -28,16 +31,28 @@ const MovieContainer = () => {
     }
   }, []);
 
+  const filteredMovies = movies.filter(movie => {
+    if (searchText === '') {
+      return true;
+    }
+
+    const searchLower = searchText.toLowerCase();
+    const fieldToSearch = filter === MovieFilter.TITLE ? movie.title : movie.description;
+
+    return fieldToSearch.toLowerCase().includes(searchLower);
+  });
+
   useEffect(() => {
     void fetchMovies();
   }, [fetchMovies]);
 
   return (
     <div className="movie-container">
-      {movies && movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} onClick={setSelectedMovie} />
+      {filteredMovies.length == 0 && "No movies found."}
+      {filteredMovies && filteredMovies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} onClick={setSelectedMovie}/>
       ))}
-      {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} onClose={() => setSelectedMovie(null)} />)}
+      {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} onClose={() => setSelectedMovie(null)}/>)}
     </div>
   );
 }
