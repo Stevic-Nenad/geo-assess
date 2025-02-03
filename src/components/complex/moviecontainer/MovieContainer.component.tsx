@@ -37,7 +37,7 @@ const MovieContainer = () => {
       {movies && movies.map((movie) => (
         <MovieCard key={movie.id} movie={movie} onClick={setSelectedMovie} />
       ))}
-      {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} open={true}/>)}
+      {movies && movies.length > 0 && (<MovieDetails movie={selectedMovie} onClose={() => setSelectedMovie(null)} />)}
     </div>
   );
 }

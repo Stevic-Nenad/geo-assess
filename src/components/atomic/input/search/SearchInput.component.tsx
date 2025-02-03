@@ -1,10 +1,13 @@
 import "./SearchInput.style.scss";
+import SearchInputProps from "./SearchInput.props.ts";
 
-const SearchInput = () => {
+const SearchInput = ({text, onChange}: SearchInputProps) => {
   return (
-    <div className="search">
-      Search
-    </div>
+    <input className="input-search"
+           value={text}
+           onChange={() => onChange(text)}
+           placeholder="Search..."
+    />
   );
 }
 
