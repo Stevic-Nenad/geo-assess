@@ -1,9 +1,10 @@
 import './App.css'
+import HomePage from "./page/Home.page.tsx";
 
 const App = () => {
   return(
     <div>
-      App
+      <HomePage />
     </div>
   )
 }
