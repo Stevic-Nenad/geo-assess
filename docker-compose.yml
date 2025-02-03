@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  json-server:
+    image: clue/json-server
+    ports:
+      - "8080:80"
+    command: [
+      "https://raw.githubusercontent.com/GeoWerkstatt/coding-assessment-assets/refs/heads/main/db.json",
+      "--host",
+      "0.0.0.0",
+      "--cors"
+    ]
+
+  frontend:
+    container_name: vite-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    command: [ "npm", "run", "dev", "--", "--host" ]
