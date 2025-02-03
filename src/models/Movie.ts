@@ -2,7 +2,7 @@ interface Movie {
   id: number;
   title: string;
   description: string;
-  image: string;
+  cover?: string;
 }
 
 export default Movie;

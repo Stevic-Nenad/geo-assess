@@ -1,5 +1,6 @@
 import "./Home.style.scss";
 import Header from "../components/complex/header/Header.component.tsx";
+import MovieContainer from "../components/complex/moviecontainer/MovieContainer.component.tsx";
 
 const HomePage = () => {
   return (
@@ -9,9 +10,7 @@ const HomePage = () => {
         <h2 className="home-page__content__title">
           Browse
         </h2>
-        <div className="home-page__content__movies">
-          Movies
-        </div>
+        <MovieContainer />
       </div>
     </div>
   );

@@ -1,13 +1,33 @@
 import "./MovieContainer.style.scss";
 import Movie from "../../../models/Movie.ts";
-import {useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 const MovieContainer = () => {
-  const [movies, setMovies] = React.useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
-  return(
+  const fetchMovies = useCallback(async () => {
+    try {
+      const response = await fetch("http://localhost:8080/movies");
+      if (!response.ok) {
+        throw new Error("Could not find movies from the server");
+      }
+      const data = await response.json();
+      setMovies(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    void fetchMovies();
+  }, [fetchMovies]);
+
+  return (
     <div className="movie-container">
-      Movie Container
+      {movies && movies.map((movie) => (
+        <div className="movie" key={movie.id}>{movie.title
+        }</div>
+      ))}
     </div>
   );
 }
