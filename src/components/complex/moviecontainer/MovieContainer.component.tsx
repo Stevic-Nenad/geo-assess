@@ -2,6 +2,7 @@ import "./MovieContainer.style.scss";
 import Movie from "../../../models/Movie.ts";
 import {useCallback, useEffect, useState} from "react";
 import MovieCard from "../moviecard/MovieCard.component.tsx";
+import MovieDetails from "../moviedetails/MovieDetails.component.tsx";
 
 const MovieContainer = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -17,7 +18,7 @@ const MovieContainer = () => {
       //add some sample images to the movies so it looks a bit nicer :)
       const moviesWithCovers: Movie[] = data.map(movie => ({
         ...movie,
-        cover: `https://picsum.photos/200?random=${movie.id}`
+        cover: `https://picsum.photos/400?random=${movie.id}`
       }));
 
       setMovies(moviesWithCovers);
@@ -35,6 +36,7 @@ const MovieContainer = () => {
       {movies && movies.map((movie) => (
         <MovieCard key={movie.id} movie={movie}/>
       ))}
+      {movies && movies.length > 0 && (<MovieDetails movie={movies[0]} open={true}/>)}
     </div>
   );
 }
