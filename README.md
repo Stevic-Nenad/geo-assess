@@ -23,7 +23,7 @@ Deleted unneeded files, adjusted some variables, trimmed down the style sheets. 
 ### 6. Looked for Inspiration
 Looked to find a potential design that i like, how the app should look. Used this as reference:
 
-https://dribbble.com/shots/18034840-Moonton-Movie-Streaming-Dashboard/attachments/13221731?mode=medi'
+https://cdn.dribbble.com/users/1107552/screenshots/18034840/media/784759d7a0361442918579be98edd05f.png
 
 ### 7. Started with the Implementation
 Look towards the commit history to see how it came to be step by step
