@@ -6,7 +6,12 @@ const HomePage = () => {
     <div className="home-page">
       <Header/>
       <div className="home-page__content">
-        Content
+        <h2 className="home-page__content__title">
+          Browse
+        </h2>
+        <div className="home-page__content__movies">
+          Movies
+        </div>
       </div>
     </div>
   );
