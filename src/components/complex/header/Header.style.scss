@@ -1,9 +1,15 @@
 .header {
+  position: sticky;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+
+  padding: 1rem 2rem;
   height: 4rem;
+
   background: #222;
+
+  border-radius: var(--border-radius-m);
 }
