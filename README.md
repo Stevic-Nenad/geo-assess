@@ -52,7 +52,7 @@ The Grid is an arch nemesis of mine. I don't like how it behaves most of the tim
 ## How to run it
 
 ### Containers are the way
-``docker compose up --build``
+``docker-compose up --build``
 
 ### Local is more convenient
 ```
